@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export default function Layout({ children }) {
@@ -6,7 +5,7 @@ export default function Layout({ children }) {
 }
 
 const Wrapper = styled.div`
-  max-width: 36rem;
+  max-width: 800px;
   padding: 0 1rem;
   margin: 3rem auto 6rem;
 `;
