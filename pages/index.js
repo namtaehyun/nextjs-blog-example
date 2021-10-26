@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { getSortedPostsData } from '../lib/posts';
 
-export default function Home() {
+export default function Home({ allPostsData }) {
+
   return (
     <div className="container">
       <Head>
@@ -13,6 +15,21 @@ export default function Home() {
         <h1 className="title">
           Read <Link href="/posts/first-post">Post</Link>
         </h1>
+
+        <section>
+        <h2>Blog</h2>
+        <ul>
+          {allPostsData.map(({ id, date, title }) => (
+            <li key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
+      </section>
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
@@ -196,4 +213,14 @@ export default function Home() {
       `}</style>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+
+  return {
+    props: {
+      allPostsData
+    }
+  }
 }
