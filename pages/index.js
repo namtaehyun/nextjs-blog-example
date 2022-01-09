@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Date from '../components/date';
 import { getSortedPostsData } from '../lib/posts';
 
 export default function Home({ allPostsData }) {
-
   return (
     <div className="container">
       <Head>
@@ -17,19 +17,21 @@ export default function Home({ allPostsData }) {
         </h1>
 
         <section>
-        <h2>Blog</h2>
-        <ul>
-          {allPostsData.map(({ id, date, title }) => (
-            <li key={id}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
-            </li>
-          ))}
-        </ul>
-      </section>
+          <h2>Blog</h2>
+          <ul>
+            {allPostsData.map(({ id, date, title }) => (
+              <li key={id}>
+                <Link href={`/posts/${id}`}>{title}</Link>
+                <br />
+                {id}
+                <br />
+                <small>
+                  <Date dateString={date} />
+                </small>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
@@ -220,7 +222,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      allPostsData
-    }
-  }
+      allPostsData,
+    },
+  };
 }
